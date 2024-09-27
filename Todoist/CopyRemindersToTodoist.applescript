@@ -2,7 +2,7 @@
 set remindersOpen to application "Reminders" is running
 
 set todoistToken to "b72150682f676f4f5dec879ea0c148baddc32f83"
-set apiCall to "curl https://api.todoist.com/sync/v8/quick/add"
+set apiCall to "curl https://api.todoist.com/sync/v9/quick/add"
 
 set listOfCommands to {}
 
@@ -66,7 +66,7 @@ tell application "Reminders"
 		set _tmp to my encode_text(unencodedText, true, true)
 		set taskBody to " -d note=" & "'" & _tmp & "'"
 
-		set postToAPI to apiCall & " -d token='" & todoistToken & "'" & taskTitle & taskReminder & taskBody
+		set postToAPI to apiCall & " -H 'Authorization: Bearer " & todoistToken & "'" & taskTitle & taskReminder & taskBody
 
 		copy postToAPI to the end of listOfCommands
 
